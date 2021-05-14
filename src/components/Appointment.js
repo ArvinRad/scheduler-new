@@ -1,12 +1,16 @@
-import React from "react";
-import "components/Appointment.scss";
+import React from 'react'
+import "./Appointment/styles.scss";
+import Header from "./Appointment/Header";
+import Empty from "./Appointment/Empty";
+import Show from "./Appointment/Show";
 
 export default function Appointment(props) {
+  console.log(props.interview);
 
   return (
-    <li className={dayClass} onClick={() => props.setDay(props.name)}>
-      <h2 className="text--regular" >{props.name}</h2>
-      <h3 className="text--light">{spotsText()}</h3>
-    </li>
+      <article className="appointment">
+        <Header {...props}/>
+        {props.interview ? <Show {...props}/> : <Empty {...props}/>}
+      </article>
   );
 }
