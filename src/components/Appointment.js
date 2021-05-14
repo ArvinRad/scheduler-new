@@ -5,7 +5,6 @@ import Empty from "./Appointment/Empty";
 import Show from "./Appointment/Show";
 
 export default function Appointment(props) {
-  console.log(props.interview);
 
   return (
       <article className="appointment">
