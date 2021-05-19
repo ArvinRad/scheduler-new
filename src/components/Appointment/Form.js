@@ -18,7 +18,7 @@ export default function Form(props) {
   };
 
    const onSave = function () {
-    props.onSave();
+    if(studentName && interviewer) props.onSave(studentName, interviewer);
     reset();
    }
 
@@ -36,7 +36,7 @@ export default function Form(props) {
             name="name"
             type="text"
             placeholder="Enter Student Name"
-            value={studentName}
+            value={props.name}
             onChange={event => setStudentName(event.target.value)}
           />
         </form>
