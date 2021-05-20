@@ -3,7 +3,7 @@ import React from "react";
 
 
 export default function Show(props) {
- console.log(props);
+ 
   let interviewerName = "";
   if (props.interviewer !== undefined) {
   interviewerName = props.interviewer.name;

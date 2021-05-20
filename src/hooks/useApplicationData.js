@@ -2,7 +2,8 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 
 
-const useApplicationData = (id, interview) => {
+export default function useApplicationData(props) {
+
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -41,40 +42,46 @@ const useApplicationData = (id, interview) => {
   }, []);
 
   //Find the day when the appointment array changes
-
-  let getDayIndex = 0;
+  const getDay = (id) => {
+    let getDayIndex = 0;
   if (id) {
     getDayIndex = state.days.indexOf(state.days
-   .find(day => day.appointment.includes(id)));
+   .find(day => day.appointments.includes(id)));
   };
+  return getDayIndex
+  }
+
 
   // Book a new interview
   const bookInterview = (id, interview) => {
     //Make data persistant
     return axios.put(`/api/appointments/${id}`, {interview})
     .then ((res) => {
+
+      if (state.appointments[id].interview === null) {
+        state.days[getDay(id)].spots = state.days[getDay(id)].spots - 1;
+      }
         const appointment = {
           ...state.appointments[id],
           interview: { ...interview }
-        };
-        const day = {
-          ...state.days[getDayIndex],
-          spots: this.spots + 1,
-          appointment: [...appointment,id],
-          interviewers: [...interviewers, interview.interviewer]
         };
         const appointments = {
           ...state.appointments,
           [id]: appointment
         };
-        state.days.splice(getDayIndex, 1, day);
+
+        // Update the days array
+
+        state.days.map(day =>
+          day.name === state.days[getDay(id)].name ?  state.days[getDay(id)] : day);
+
          //Update the state
-        setState({...state, days, appointments});
+        setState({...state, appointments});
     });
   };
 
   // Delete an interview
-  const cancelInterview = (id) => {
+  const deleteInterview = (id) => {
     //Make data persistant
     return axios.delete(`/api/appointments/${id}`)
     .then ((res) => {
@@ -82,23 +89,19 @@ const useApplicationData = (id, interview) => {
           ...state.appointments[id],
           interview: null
         };
-        const day = {
-          ...state.days[getDayIndex],
-          spots: spots - 1,
-          appointment: appointment.filter(item => item !== id),
-          interviewers: interviewers.filter(item => item !== interview.interviewer)
-        };
+        state.days[getDay(id)].spots = state.days[getDay(id)].spots + 1;
         const appointments = {
           ...state.appointments,
           [id]: appointment
         };
+
+        state.days.map(day =>
+          day.name === state.days[getDay(id)].name ? state.days[getDay(id)] : day);
+
          //Update the state
-        setState({...state, days, appointments});
+        setState({...state, appointments});
     });
   };
 
-  return { state, setDay, bookInterview, cancelInterview };
+  return { state, setDay, bookInterview, deleteInterview };
 }
-
-
-export default useApplicationData;

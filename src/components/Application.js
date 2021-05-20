@@ -7,48 +7,9 @@ import "components/Application.scss";
 
 
 
-export default function Application(props) {
+export default function Application() {
 
   // state and its initiating
-
-//   const [state, setState] = useState({
-//     day: "Monday",
-//     days: [],
-//     appointments: {},
-//     interviewers: {}
-//     // filteredAppointments: []
-//   });
-//   const setDay = day => setState({ ...state, day });
-//   const setDays = days => setState((prev) => {
-//     return {...prev, days};
-//   });
-//   const setAppointments = appointments => setState((prev) => {
-//     return { ...prev, appointments };
-//   });
-//   const setInterviewers = interviewers => setState((prev) => {
-//     return { ...prev, interviewers };
-//   });
-
-// // Axios and state arrays filling
-//   useEffect(() => {
-//     const url1 = `/api/days`
-//     const url2 = `/api/appointments`
-//     const url3 = `/api/interviewers`
-
-
-//     const Promise1 = axios.get(url1);
-//     const Promise2 = axios.get(url2);
-//     const Promise3 = axios.get(url3);
-
-
-//     Promise.all([Promise1, Promise2, Promise3]).then((res)  => {
-//       setDays([...res[0].data]);
-//       setAppointments({...res[1].data});
-//       setInterviewers({...res[2].data});
-//     })
-//     .catch(err => console.log(err));
-//   }, []);
-// Call for state data initiation and callbacks
 
   const {
     state,
@@ -58,53 +19,15 @@ export default function Application(props) {
   } = useApplicationData();
 
  // Find daily appoitment and Interviewers from the helpers
+
   const {
     getAppointmentsForDay,
     getInterviewersForDay,
     getInterview
   } = selectors (state, state.day);
 
-  // const dailyAppointments = getAppointmentsForDay (state, state.day);
-  // const dailyInterviewers = getInterviewersForDay (state, state.day);
-
-// // Book a new interview
-//   const bookInterview = (id, interview) => {
-//     //Make data persistant
-//     return axios.put(`/api/appointments/${id}`, {interview})
-//     .then ((res) => {
-//         const appointment = {
-//           ...state.appointments[id],
-//           interview: { ...interview }
-//         };
-//         const appointments = {
-//           ...state.appointments,
-//           [id]: appointment
-//         };
-//          //Update the state
-//         setState({...state, appointments});
-//     });
-//   };
-
-//   // Delete an interview
-//   const deleteInterview = (id) => {
-//     //Make data persistant
-//     return axios.delete(`/api/appointments/${id}`)
-//     .then ((res) => {
-//         const appointment = {
-//           ...state.appointments[id],
-//           interview: null
-//         };
-//         const appointments = {
-//           ...state.appointments,
-//           [id]: appointment
-//         };
-//          //Update the state
-//         setState({...state, appointments});
-//     });
-//   };
-
   // Prepare props and call for showing appointment
-  const appointmentList = Object.values(getAppointmentsForDay).map((app) => {
+  const appointmentList = Object.values(getAppointmentsForDay(state, state.day)).map((app) => {
 
     if (app !== undefined) {
       const interviewData = getInterview(state, app.interview);
@@ -113,7 +36,7 @@ export default function Application(props) {
         bookInterview={bookInterview}
         deletedInterview={deleteInterview}
         interviewShow={interviewData}
-        dailyInterviewers={getInterviewersForDay}
+        dailyInterviewers={getInterviewersForDay(state, state.day)}
         {...app}
         />
     };
