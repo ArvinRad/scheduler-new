@@ -1,5 +1,6 @@
-const selectors = () => {
-  
+
+export default function selectors() {
+
   const getAppointmentsForDay = (state, day) => {
     let filteredAppointments = [];
     if (day && JSON.stringify(state.days).includes(day)) {
@@ -30,8 +31,5 @@ const selectors = () => {
       }
     return getInterview;
   }
-
   return { getAppointmentsForDay, getInterviewersForDay, getInterview }
 }
-
-module.exports = selectors;

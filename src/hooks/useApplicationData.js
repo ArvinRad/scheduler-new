@@ -69,7 +69,6 @@ export default function useApplicationData(props) {
           ...state.appointments,
           [id]: appointment
         };
-
         // Update the days array
 
         state.days.map(day =>
@@ -77,6 +76,7 @@ export default function useApplicationData(props) {
 
          //Update the state
         setState({...state, appointments});
+
     });
   };
 

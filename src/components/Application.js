@@ -24,7 +24,7 @@ export default function Application() {
     getAppointmentsForDay,
     getInterviewersForDay,
     getInterview
-  } = selectors (state, state.day);
+  } = selectors ();
 
   // Prepare props and call for showing appointment
   const appointmentList = Object.values(getAppointmentsForDay(state, state.day)).map((app) => {

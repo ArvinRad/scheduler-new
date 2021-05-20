@@ -71,8 +71,9 @@ export default function Appointment(props) {
         {mode === CREATE &&
           <Form
             interviewers={props.dailyInterviewers}
-            onCancel={back}
-            onSave={save}/>}
+            onCancel={() => transition(EMPTY)}
+            onSave={save}
+            />}
         {mode === EDIT &&
           <Form
             name={props.interview.student}
@@ -101,7 +102,7 @@ export default function Appointment(props) {
           {(mode === ERROR_SAVE) &&
           <Error
           message="Could not do the save."
-          onClose={back}
+          onClose={() => {props.interview ? transition(SHOW) : transition(CREATE)}}
           />}
         </article>
   );
