@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 
-
+// state setter for the operation modes
 const useVisualMode = (initial) => {
 
-  let [mode, setMode] = useState(initial);
-  let [history, setHistory] = useState([initial]);
+  const [mode, setMode] = useState(initial);
+  const [history, setHistory] = useState([initial]);
 
   const transition = (newMode, replace = false) => {
 

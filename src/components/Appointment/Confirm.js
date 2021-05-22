@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "components/Button"
-
+// This is the confirm/cancel message after deleting an appointment
 export default function Confirm(props) {
 
   return (

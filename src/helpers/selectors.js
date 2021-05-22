@@ -1,6 +1,6 @@
 
 export default function selectors() {
-
+  // function for creating the appointment array for a specific day
   const getAppointmentsForDay = (state, day) => {
     let filteredAppointments = [];
     if (day && JSON.stringify(state.days).includes(day)) {
@@ -11,6 +11,7 @@ export default function selectors() {
     }
     return filteredAppointments;
   }
+  // function for creating the interview array for a specific day
 
   const getInterviewersForDay = (state, day) => {
     let filteredInterviewers = [];
@@ -22,6 +23,7 @@ export default function selectors() {
     }
     return filteredInterviewers;
   }
+  // function for creating the interview object with full interviewer data
 
   const getInterview = (state, interview) => {
     let getInterview = null;

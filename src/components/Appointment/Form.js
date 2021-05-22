@@ -4,7 +4,7 @@ import Button from "components/Button"
 
 
 export default function Form(props) {
-
+ // Setup states
   const [studentName, setStudentName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer ||null);
   const [error, setError] = useState("");
@@ -14,12 +14,11 @@ export default function Form(props) {
     setStudentName("");
     setInterviewer(null);
   };
-
+    // Save and Cancel handlers
    const onSave = function () {
     if(studentName && interviewer) props.onSave(studentName, interviewer);
     if (studentName === "") {
       setError("Student name cannot be blank");
-      console.log(error);
       return;
     }
     setError("");
@@ -30,7 +29,7 @@ export default function Form(props) {
      props.onCancel();
      reset();
    }
-
+   // Main Form Show
    return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">

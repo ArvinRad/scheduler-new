@@ -3,7 +3,7 @@ import React from "react";
 
 
 export default function Show(props) {
- 
+ // This prevents initiation error when states are uploading from database
   let interviewerName = "";
   if (props.interviewer !== undefined) {
   interviewerName = props.interviewer.name;
