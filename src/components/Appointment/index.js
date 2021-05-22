@@ -18,7 +18,7 @@ import Error from "components/Appointment/Error";
   const EDIT = "EDIT";
   const CONFIRM = "CONFIRM";
   const ERROR_SAVE = "ERROR_SAVE";
-  const ERROR_DELETE = "ERROR+DELETE";
+  const ERROR_DELETE = "ERROR_DELETE";
 
 
 
