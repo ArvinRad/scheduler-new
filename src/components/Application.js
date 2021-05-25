@@ -18,7 +18,7 @@ export default function Application() {
     deleteInterview
   } = useApplicationData();
 
- // Find daily appoitment and Interviewers from the helpers
+  // Find daily appoitment and Interviewers from the helpers
 
   const {
     getAppointmentsForDay,
@@ -27,19 +27,17 @@ export default function Application() {
   } = selectors ();
 
   // Prepare props and call for showing appointment
-  const appointmentList = Object.values(getAppointmentsForDay(state, state.day)).map((app) => {
-
-    if (app !== undefined) {
-      const interviewData = getInterview(state, app.interview);
-      return <Appointment
-        key={app.id}
-        bookInterview={bookInterview}
-        deletedInterview={deleteInterview}
-        interviewShow={interviewData}
-        dailyInterviewers={getInterviewersForDay(state, state.day)}
-        {...app}
-        />
-    };
+  const appointmentList = getAppointmentsForDay(state, state.day).map((app) => {
+    let interviewData ={};
+    interviewData = getInterview(state, app.interview);
+    return <Appointment
+      key={app.id}
+      bookInterview={bookInterview}
+      deletedInterview={deleteInterview}
+      interviewShow={interviewData}
+      dailyInterviewers={getInterviewersForDay(state, state.day)}
+      {...app}
+      />
   });
 
  // Start the show

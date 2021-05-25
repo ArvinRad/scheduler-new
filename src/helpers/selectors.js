@@ -3,10 +3,12 @@ export default function selectors() {
   // function for creating the appointment array for a specific day
   const getAppointmentsForDay = (state, day) => {
     let filteredAppointments = [];
-    if (day && JSON.stringify(state.days).includes(day)) {
-      const myAppointments = (state.days.filter(item => item.name === day)[0]).appointments;
+    if (day &&  state.days.length > 0) {
+      const myAppointments = (state.days.find(item => item.name === day)).appointments;
       for (let elm of myAppointments) {
-        filteredAppointments = [...filteredAppointments, state.appointments[elm]];
+        if (Object.keys(state.appointments).length > 0) {
+          filteredAppointments = [...filteredAppointments, state.appointments[elm]];
+        }
       }
     }
     return filteredAppointments;
@@ -15,8 +17,8 @@ export default function selectors() {
 
   const getInterviewersForDay = (state, day) => {
     let filteredInterviewers = [];
-    if (day && JSON.stringify(state.days).includes(day)) {
-      const myInterviewers = (state.days.filter(item => item.name === day)[0]).interviewers;
+    if (day && state.days.length > 0) {
+      const myInterviewers = (state.days.find(item => item.name === day)).interviewers;
       for (let elm of myInterviewers) {
         filteredInterviewers = [...filteredInterviewers, state.interviewers[elm]];
       }
@@ -26,12 +28,13 @@ export default function selectors() {
   // function for creating the interview object with full interviewer data
 
   const getInterview = (state, interview) => {
-    let getInterview = null;
-    if (interview && JSON.stringify(state.appointments).includes(interview.student)) {
-      const interviewerData = Object.values(state.interviewers)[interview.interviewer - 1];
+  let getInterview = {};
+    if (interview) {
+      const interviewerData = state.interviewers[interview.interviewer];
       getInterview = {student: interview.student, interviewer: interviewerData};
       }
     return getInterview;
   }
   return { getAppointmentsForDay, getInterviewersForDay, getInterview }
 }
+

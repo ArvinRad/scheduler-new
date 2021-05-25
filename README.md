@@ -4,7 +4,15 @@ This is an application facilitating users to view interview appointments, free a
 
 ## Setup
 
-Install dependencies with `npm install`.
+Install dependencies as listed below with `npm install`.
+
+"dependencies":
+    "axios": "V0.21.1",
+    "classnames": "V2.2.6",
+    "normalize.css": "V8.0.1",
+    "react": "V16.9.0",
+    "react-dom": "V16.9.0",
+    "react-scripts": "V3.0.0"
 
 ## Running Webpack Development Server
 
@@ -23,6 +31,11 @@ npm test
 ```sh
 npm run storybook
 ```
+## Accessing Scheduler-api database from
+
+https://github.com/ArvinRad/scheduler-api
+
+
 Two screenshots of the application look like as follows:
 
 1- Screenshot of the main page:
