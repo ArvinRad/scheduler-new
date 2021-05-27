@@ -18,10 +18,11 @@ const useVisualMode = (initial) => {
 
   const back = () => {
     let newHistory = [...history];
-    newHistory = newHistory.slice(0,-1);
-    setHistory(() => ([...newHistory, newMode]));
-    const newMode = history[history.length - 1];
-    setMode(newMode);
+    newHistory = newHistory.slice(0, -1);
+    setHistory(history = newHistory);
+    let preMode = history[history.length - 1];
+    if (preMode === undefined) preMode = "SHOW";
+    setMode(preMode);
   };
 
   return { mode, transition, back };

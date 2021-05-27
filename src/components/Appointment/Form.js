@@ -30,7 +30,6 @@ export default function Form(props) {
 
   const onCancel = function() {
      props.onCancel();
-     reset();
   }
    // Main Form Show
   return (
